@@ -17,20 +17,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 
-# username = 'alexandertham95@gmail.com' suspended
-# password = 'AT95password'
-
-# username = 'christophersim79@gmail.com' suspended
-# password = 'chrissim79password'
-
-# username = 'anyadoshi99@gmail.com' suspended
-# password = 'anyadoshi99password'
-
-username = 'alexwangrong99@gmail.com'
-password = 'AW99password'
-
-# username = 'thomaswys9@gmail.com' suspended
-# password = 'Loyalty@2020'
+username = 'type email'
+password = 'type password'
 
 
 # Make dataframe to store profile info
@@ -39,7 +27,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Major Year', 'Inter
 dict_blanks = {'blanks': 0}
 
 # Logging in
-driver = webdriver.Chrome('/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/chromedriver')
+driver = webdriver.Chrome('path to chromedriver')
 driver.get('https://www.linkedin.com/login')
 elementID = driver.find_element_by_id('username')
 elementID.send_keys(username)
@@ -51,7 +39,7 @@ time.sleep(80)
 
 
 # Linkedin URLs directory
-urls_dir = r'/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/URLs'
+urls_dir = r'path to URLs directory'
 
 
 
@@ -93,7 +81,6 @@ def scrape(profile, index):
 #MAJOR
     try:
         major = soup.find('section', {'id': 'education-section'})
-        #major = major.find('span', {'class': 'pv-entity__comma-item'})
         major = major.find_all('span', {'class': 'pv-entity__comma-item'}) # find all majors
         
         #majors
@@ -102,7 +89,6 @@ def scrape(profile, index):
             M.append(i.get_text().strip())
             
         major = M
-        #major = major.get_text()
         
     except:
         major = 'Blank'
@@ -110,7 +96,6 @@ def scrape(profile, index):
 #MAJOR YEAR
     try:
         major_year = soup.find('section', {'id': 'education-section'})
-        #major_year = major_year.find_all('p', {'class': 'pv-entity__dates t-14 t-black--light t-normal'})
         major_year = major_year.find_all('time')
     
         #major year
@@ -278,7 +263,7 @@ def execute(profile_links,driver):
     if len(linkedin_fails) > 0:
         try:
             # Logging in
-            driver = webdriver.Chrome('/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/chromedriver')
+            driver = webdriver.Chrome('path to chromedriver')
             driver.get('https://www.linkedin.com/login')
             elementID = driver.find_element_by_id('username')
             elementID.send_keys(username)
@@ -305,10 +290,6 @@ def execute(profile_links,driver):
 
 for csvfile in glob.glob(urls_dir + '/*'):
     uni_name = csvfile.split('/')[-1].split('_')[0]
-    
-    print(f'running {uni_name} csv file')
-    if uni_name == 'NUS' or uni_name == 'SMU':
-        continue
     
     start = time.time() #start timer
     
