@@ -52,8 +52,6 @@ def valid(profile):
 
 username = '#YOUR USERNAME#'
 password = '#YOUR PASSWORD#'
-username = 'alexandertham95@gmail.com'
-password = 'AT95password'
 
 
 
@@ -63,11 +61,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Internships', 'Cert
 
 #log in
 #driver = webdriver.Chrome(r"#chromedriver Path#")
-driver = webdriver.Chrome('/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/chromedriver')
 driver.get('https://www.linkedin.com/login')
-
-# username = alexandertham95@gmail.com
-# password = AT95password
 
 
 elementID = driver.find_element_by_id('username')
@@ -122,17 +116,6 @@ for profile in profile_links:
     src = driver.page_source
     soup = BeautifulSoup(src, 'lxml')
 
-    #LINKS
-    # for link in soup.findAll('a', href = True):
-    # 	if 'in/' in link.get('href'):
-    # 		print(link.get('href'))
-
-    #Clicking show more button
-    # show_more = driver.find_element_by_xpath('//*[@id="ember168"]/button')
-    # show_more.click()
-
-
-    #valid(profile)
 
 #NAME
     try:
