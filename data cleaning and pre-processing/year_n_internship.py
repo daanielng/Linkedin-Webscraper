@@ -5,7 +5,7 @@ import pandas as pd
 from ast import literal_eval
 import datetime
 
-data_dir = r'/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/cleaned_data.csv'
+data_dir = r'data directory path'
 
 #load csv file
 df = pd.read_csv(data_dir)
