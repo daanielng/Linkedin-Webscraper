@@ -14,8 +14,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-username = 'alexandertham95@gmail.com'
-password = 'AT95password'
+username = 'type email'
+password = 'type password'
 
 
 # Make dataframe to store profile info
@@ -23,7 +23,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Internships', 'Cert
 
 
 # Logging in
-driver = webdriver.Chrome('/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/chromedriver')
+driver = webdriver.Chrome('path to chromedriver')
 driver.get('https://www.linkedin.com/login')
 elementID = driver.find_element_by_id('username')
 elementID.send_keys(username)
@@ -109,46 +109,34 @@ def scrape(profile, index):
         
 #MAJOR
     try:
-        #ul.pv-profile-section__section-info.section-info.pv-profile-section__section-info--has-no-more
-        #education-section.pv-profile-section.education-section.ember-view
 
         major = soup.find('section', {'id': 'education-section'})
-        #major = soup.find('p', {'class': 'pv-entity__secondary-title pv-entity__fos t-14 t-black t-normal'})
-        #major = major.find('ul')
         major = major.find('span', {'class': 'pv-entity__comma-item'})
         
         major = major.get_text()
         
     except:
         major = 'Blank'
-        #print(f'profile {index+1}: {name}\'s major is blank')
         
 
 #CERTIFICATIONS
     try:
         
         certs = soup.find('section',{'id':'certifications-section'})
-        #certs = certs.find_all('ul', {'class': 'pv-profile-section__section-info section-info pv-profile-section__section-info--has-no-more'})
-        #certs = certs.find('ul')
-        #certs = certs.find_all('li', {'class': 'pv-profile-section__sortable-item pv-certification-entity ember-view'})
         certs = certs.find_all('h3', {'class': 't-16 t-bold'})
 
         C = []
         for i in certs:
             C.append(i.get_text().strip())
         certs = C
-        #certs = ''.join(C)
 
     except:
         certs = 'Blank'
-        #print(f'profile {index+1}: {name}\'s cert is blank')
         
 
 #INTERNSHIPS
     try:
         internships = soup.find('section',{'id':'experience-section'})
-        #internships = soup.find('ul', {'class': 'pv-profile-section__section-info section-info pv-profile-section__section-info--has-more'})
-        #internships = internships.find('ul')
         internships = internships.find_all('h3', {'class': 't-16 t-black t-bold'})
 
         I =[]
@@ -162,9 +150,7 @@ def scrape(profile, index):
         #print(f'profile {index+1}: {name}\'s internship is blank')
 
 
-    # #Internships Descriptions
-    # try:
-    #     intern_descriptions = soup.find('section',{'id':'experience-section'})
+   
     insert_info(name, uni, major, internships, certs)
 
 def insert_info(name, uni, major, internships, certs):
@@ -218,38 +204,4 @@ driver.close()
 
 df.to_csv("testing_last.csv", encoding = 'utf-8', index= False) #saving as .csv file
 
-    
-    
-    
-    
-    
-    # count = 1
-    # while not scrape(profile, index):
-    #     print(f"retrying profile {index+1}, count: {count}")
-        
-    #     if count == 3:
-            
-    #         driver.close()
-    #         #troubleshoot by logging in again
-    #         print('restarting chrome...')
-    #         driver = webdriver.Chrome('/Users/danielng/Documents/Coding/Data Science:Analytics Stuff/Useful notebooks/Web Scraping on Linkedin/chromedriver')
-    #         driver.get('https://www.linkedin.com/login')
-    #         elementID = driver.find_element_by_id('username')
-    #         elementID.send_keys(username)
-    #         elementID = driver.find_element_by_id('password')
-    #         elementID.send_keys(password)
-    #         elementID.submit()
-            
-    #     elif count ==4:
-    #         print(f'unable to scrape profile {index+1}')
-    #         break
-        
-    #     scrape(profile, index)
-    #     count += 1
-    
-    # driver.close()
-        
-        
-    
-    # index +=1
-    
+  
