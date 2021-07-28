@@ -5,8 +5,8 @@
 # ignore chromdrvier file
 chromedriver
 
-# ignore useraccount info
-account.ini
+# ignore config file
+config.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

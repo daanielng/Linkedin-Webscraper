@@ -8,10 +8,15 @@ We require the user to log in to their Linkedin Account.
 Please create a `config.ini` file with the following content
 
 ```ini
+[DRIVER]
+path = path/to/chromdriver
+
 [ACCOUNT]
 username = email@email.com
 password = password123
 ```
+
+Please refer to [Selenium](#Selenium) for instructions on chrome driver path
 
 # Setting up URLs
 

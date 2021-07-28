@@ -1,3 +1,4 @@
+"""Scarp Linkedin data with given URLs."""
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -18,8 +19,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 config = configparser.ConfigParser()
-config.read("account.ini")
+config.read("config.ini")
 
+driver_path = config["DRIVER"]["path"]
 username = config["ACCOUNT"]["username"]
 password = config["ACCOUNT"]["password"]
 
@@ -30,7 +32,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Major Year', 'Inter
 dict_blanks = {'blanks': 0}
 
 # Logging in
-driver = webdriver.Chrome('/usr/local/bin/chromedriver')
+driver = webdriver.Chrome(driver_path)
 driver.get('https://www.linkedin.com/login')
 elementID = driver.find_element_by_id('username')
 elementID.send_keys(username)

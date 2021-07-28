@@ -5,6 +5,7 @@ import datetime
 import parsel
 from parsel import Selector
 import time
+import configparser
 import numpy as np
 import pandas as pd
 import os
@@ -14,8 +15,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-username = 'type email'
-password = 'type password'
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+driver_path = config["DRIVER"]["path"]
+username = config["ACCOUNT"]["username"]
+password = config["ACCOUNT"]["password"]
 
 
 # Make dataframe to store profile info
@@ -23,7 +28,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Internships', 'Cert
 
 
 # Logging in
-driver = webdriver.Chrome('path to chromedriver')
+driver = webdriver.Chrome(driver_path)
 driver.get('https://www.linkedin.com/login')
 elementID = driver.find_element_by_id('username')
 elementID.send_keys(username)
@@ -71,20 +76,20 @@ profile_links = [
 
 
 def scrape(profile, index):
-    
+
     driver.get(profile)
     #time.sleep(5) #it allows for the page source to fully load
-    
+
     src = driver.page_source
     soup = BeautifulSoup(src, 'lxml')
-    
+
     total_height = int(driver.execute_script("return document.body.scrollHeight"))
 
     for i in range(1, total_height, 5):
         driver.execute_script("window.scrollTo(0, {});".format(i))
 
     time.sleep(3.5)
- 
+
 
 
 #NAME
@@ -101,28 +106,28 @@ def scrape(profile, index):
     try:
         uni = soup.find('h3', {'class': 'pv-entity__school-name t-16 t-black t-bold'})
         uni = uni.get_text()
-        
+
     except:
         uni = 'Blank'
         print(f'profile {index+1}: {name}\'s uni is blank')
-        
-        
+
+
 #MAJOR
     try:
 
         major = soup.find('section', {'id': 'education-section'})
         major = major.find('span', {'class': 'pv-entity__comma-item'})
-        
+
         major = major.get_text()
-        
+
     except:
         major = 'Blank'
         print(f'profile {index+1}: {name}\'s major is blank')
-        
+
 
 #CERTIFICATIONS
     try:
-        
+
         certs = soup.find('section',{'id':'certifications-section'})
         certs = certs.find_all('h3', {'class': 't-16 t-bold'})
 
@@ -135,7 +140,7 @@ def scrape(profile, index):
     except:
         certs = 'Blank'
         print(f'profile {index+1}: {name}\'s cert is blank')
-        
+
 
 #INTERNSHIPS
     try:
@@ -153,16 +158,16 @@ def scrape(profile, index):
         print(f'profile {index+1}: {name}\'s internship is blank')
 
 
-    
+
     if major!= 'Blank' and uni != 'Blank':
         df.loc[index,'Name'] = name
         df.loc[index, 'University'] = uni
         df.loc[index,'Major'] = major
         df.loc[index,'Internships'] = internships
         df.loc[index,'Certifications'] = certs
-    
+
         print(f'scrapped profile {index+1}')
-        
+
     else:
         return None
     time.sleep(0.7)
