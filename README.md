@@ -1,6 +1,18 @@
 # Linkedin Webscraper
  Created a webscraper that takes in Linkedin URLs scraped from Google Chrome Search and then scrapes every Linkedin profile information.
 
+# Setting up account information
+
+We require the user to log in to their Linkedin Account.
+
+Please create a `config.ini` file with the following content
+
+```ini
+[ACCOUNT]
+username = email@email.com
+password = password123
+```
+
 # Note
  The webscrapers that are readily available on other repositories do not seem to work on my work station for some reason. Thus, my personal webscraper may also not work for you but do feel free to try it out!
 
@@ -24,7 +36,8 @@ To check Chrome version
 google-chrom --version
 ```
 
-After download please place in the home directory.
+driver must be placed in PATH, please follow the instructions
+[here](https://www.browserstack.com/guide/run-selenium-tests-using-selenium-chromedriver)
 
 # Developer
 
