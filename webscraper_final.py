@@ -27,7 +27,7 @@ df = pd.DataFrame(columns = ['Name', 'University', 'Major', 'Major Year', 'Inter
 dict_blanks = {'blanks': 0}
 
 # Logging in
-driver = webdriver.Chrome('path to chromedriver')
+driver = webdriver.Chrome('/home/ling/projects/Linkedin-Webscraper/chromedriver')
 driver.get('https://www.linkedin.com/login')
 elementID = driver.find_element_by_id('username')
 elementID.send_keys(username)

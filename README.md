@@ -8,5 +8,25 @@
  Although the legal terms of webscraping on Linkedin public data is rather blurry, scraping data from Linkedin is nonethless still a difficult task due to its security features. I recommend creating multiple dummy accounts for this task to avoid your personal account from being suspended!
  
 # Dependencies
-1. Selenium
-2. BeautifulSoup
+
+## Selenium:
+
+Web driver is required before using Selenium.
+
+we used `ChromeDriver` for this project.
+
+Please follow the links [here](https://chromedriver.chromium.org/downloads) to download the correct driver.
+
+To check Chrome version
+```bash
+google-chrom --version
+```
+
+After download please place in the home directory.
+
+# Developer
+
+Install dependencies with
+```bash
+pip install -r requirements.txt
+```
