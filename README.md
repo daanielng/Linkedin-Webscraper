@@ -9,6 +9,8 @@
  
 # Dependencies
 
+Python==3.8
+
 ## Selenium:
 
 Web driver is required before using Selenium.
