@@ -13,6 +13,10 @@ username = email@email.com
 password = password123
 ```
 
+# Setting up URLs
+
+We expect the Linkedin URLs to be placed under [URLs folder](URLs)
+
 # Note
  The webscrapers that are readily available on other repositories do not seem to work on my work station for some reason. Thus, my personal webscraper may also not work for you but do feel free to try it out!
 
