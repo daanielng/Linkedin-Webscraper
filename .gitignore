@@ -1,3 +1,13 @@
+# ignore temp files
+.DS_Store
+*.swp
+
+# ignore chromdrvier file
+chromedriver
+
+# ignore config file
+config.ini
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

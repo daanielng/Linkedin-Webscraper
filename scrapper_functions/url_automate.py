@@ -1,3 +1,4 @@
+"""Automatically saves the URLs scarped from Google search results."""
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -5,6 +6,7 @@ import datetime
 import parsel
 from parsel import Selector
 import time
+import configparser
 import numpy as np
 import pandas as pd
 import os
@@ -14,14 +16,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+config = configparser.ConfigParser()
+config.read("config.ini")
 
-username = 'type email'
-password = 'type password'
-
-
+driver_path = config["DRIVER"]["path"]
 
 # Logging in
-driver = webdriver.Chrome('path to chromedriver')
+driver = webdriver.Chrome(driver_path)
 
 
 #google search linkedin URLs
@@ -52,13 +53,13 @@ while count!=50:
 
         time.sleep(0.8)
 
-        
+
         for link in soup.findAll('a', href = True):
             url = link.get('href')
             if 'https://sg.linkedin.com/in/' in url and url not in linkedin_urls:
                 linkedin_urls.append(url)
                 print(f'stored: {url}')
-                
+
         time.sleep(0.5)
         print(f'scrapped page {count+1} ')
         next_page = driver.find_element_by_id('pnnext')
@@ -67,7 +68,7 @@ while count!=50:
     except:
         print('error: No more pages left')
         break
-    
+
 end = time.time()
 print(f'scrapping took {end-start} seconds')
 if len(linkedin_urls)>0:

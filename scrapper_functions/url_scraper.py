@@ -1,3 +1,4 @@
+"""Extract Linkedin URLs based on Google search results."""
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -5,6 +6,7 @@ import datetime
 import parsel
 from parsel import Selector
 import time
+import configparser
 import numpy as np
 import pandas as pd
 import os
@@ -14,14 +16,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+config = configparser.ConfigParser()
+config.read("config.ini")
 
-username = 'type email'
-password = 'type password'
-
-
+driver_path = config["DRIVER"]["path"]
 
 # Logging in
-driver = webdriver.Chrome('path to chromedriver')
+driver = webdriver.Chrome(driver_path)
 
 #google search linkedin URLs
 universities = ['National University of Singapore', 'Singapore Management University', 'Nanyang Technological University']
