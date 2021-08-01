@@ -20,7 +20,7 @@ Please refer to [Selenium](#Selenium) for instructions on chrome driver path
 
 # Setting up URLs
 
-We expect the Linkedin URLs to be placed under [URLs folder](scraped-URLs)
+We expect the Linkedin URLs to be placed under [URLs folder](scraped%20URLs)
 
 # Note
  The webscrapers that are readily available on other repositories do not seem to work on my work station for some reason. Thus, my personal webscraper may also not work for you but do feel free to try it out!
