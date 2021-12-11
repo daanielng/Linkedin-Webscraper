@@ -1,4 +1,4 @@
-"""Scarp Linkedin data with given URLs."""
+"""Scrap Linkedin data with given URLs."""
 import requests
 from bs4 import BeautifulSoup
 import re
