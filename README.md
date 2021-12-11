@@ -1,6 +1,9 @@
 # Linkedin Webscraper
  Created a webscraper that takes in Linkedin URLs scraped from Google Chrome Search and then scrapes every Linkedin profile information.
 
+# Demo
+<img src = "scraping_snippet/snippet.gif">
+
 # Setting up account information
 
 We require the user to log in to their Linkedin Account.
